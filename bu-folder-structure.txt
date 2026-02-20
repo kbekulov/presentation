@@ -1,0 +1,19 @@
+BU Inbox
+  CEU
+    Activations
+    Data Entry
+    Maintenance Short
+    Maintenance Medium
+    Maintenance Long
+  WEU
+    Activations
+    Data Entry
+    Maintenance Short
+    Maintenance Medium
+    Maintenance Long
+  NEU
+    Activations
+    Data Entry
+    Maintenance Short
+    Maintenance Medium
+    Maintenance Long

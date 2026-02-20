@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>BU Outlook Folder Structure</title>
+  </head>
+  <body>
+    <outline text="BU Inbox">
+      <outline text="CEU">
+        <outline text="Activations" />
+        <outline text="Data Entry" />
+        <outline text="Maintenance Short" />
+        <outline text="Maintenance Medium" />
+        <outline text="Maintenance Long" />
+      </outline>
+      <outline text="WEU">
+        <outline text="Activations" />
+        <outline text="Data Entry" />
+        <outline text="Maintenance Short" />
+        <outline text="Maintenance Medium" />
+        <outline text="Maintenance Long" />
+      </outline>
+      <outline text="NEU">
+        <outline text="Activations" />
+        <outline text="Data Entry" />
+        <outline text="Maintenance Short" />
+        <outline text="Maintenance Medium" />
+        <outline text="Maintenance Long" />
+      </outline>
+    </outline>
+  </body>
+</opml>

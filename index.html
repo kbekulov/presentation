@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BU Inbox Classification Project - Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="deck-shell">
+    <header class="deck-header d-flex justify-content-between align-items-center">
+      <div class="brand">IAM LLM for e-mails categorization</div>
+      <div class="counter"><span id="slideCurrent">1</span> / <span id="slideTotal">14</span></div>
+    </header>
+
+    <main id="deck" class="deck" aria-live="polite">
+      <section class="slide active" data-title="Project Goal">
+        <div class="row h-100 align-items-center">
+          <div class="col-lg-8">
+            <p class="eyebrow">Project Journey</p>
+            <h1>Automated Email Categorization for BU Inbox</h1>
+            <p class="lead-lg">Automatically route emails into the correct folders based on <span class="pill">[Region]</span> and <span class="pill">[Task Group]</span>.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="goal-block">
+              <div><i class="bi bi-diagram-3"></i> Robot Architecture</div>
+              <div><i class="bi bi-braces-asterisk"></i> Prompt Syntax</div>
+              <div><i class="bi bi-database-check"></i> Comparing Datasets</div>
+              <div><i class="bi bi-clipboard2-pulse"></i> Testing Bench robot</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Project Tools">
+        <h2>Project Tools</h2>
+        <div class="tool-grid">
+          <article class="tool-card">
+            <i class="bi bi-robot"></i>
+            <h3>Blue Prism</h3>
+            <p>Primary RPA orchestration, queue handling, and execution controls.</p>
+          </article>
+          <article class="tool-card">
+            <i class="bi bi-cpu"></i>
+            <h3>Claude 3.5 via API</h3>
+            <p>LLM-powered classification through Dataiku integration layer.</p>
+          </article>
+          <article class="tool-card">
+            <i class="bi bi-envelope-open"></i>
+            <h3>MS Graph Outlook API (C#)</h3>
+            <p>Retrieval and folder operations on inbox messages.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Implementation Overview">
+        <h2>Implementation Overview</h2>
+        <p class="section-intro">A four-step pipeline keeps classification predictable while still using LLM support where rules are insufficient.</p>
+        <div class="overview-grid">
+          <article class="overview-step">
+            <div class="overview-head">
+              <span class="step-index">1</span>
+              <h3>Retrieve Emails</h3>
+            </div>
+            <p>Read inbox message threads through <span class="pill">MS Graph API</span> with core metadata.</p>
+          </article>
+          <div class="overview-arrow"><i class="bi bi-arrow-right"></i></div>
+          <article class="overview-step">
+            <div class="overview-head">
+              <span class="step-index">2</span>
+              <h3>Sanitize Content</h3>
+            </div>
+            <p>Remove HTML and signatures to create a clean, model-ready context.</p>
+          </article>
+          <div class="overview-arrow"><i class="bi bi-arrow-right"></i></div>
+          <article class="overview-step">
+            <div class="overview-head">
+              <span class="step-index">3</span>
+              <h3>Classify Region</h3>
+            </div>
+            <p>Apply BU matrix rules first; use the <span class="pill">LLM</span> only when no deterministic match exists.</p>
+          </article>
+          <div class="overview-arrow"><i class="bi bi-arrow-right"></i></div>
+          <article class="overview-step">
+            <div class="overview-head">
+              <span class="step-index">4</span>
+              <h3>Classify Task Group</h3>
+            </div>
+            <p>Use <span class="pill">LLM</span> to interpret natural language in the email body and decide [Task Group].</p>
+          </article>
+        </div>
+        <div class="overview-legend">
+          <span><i class="bi bi-grid-3x3-gap-fill"></i> Deterministic matrix first</span>
+          <span><i class="bi bi-stars"></i> LLM fallback for ambiguity</span>
+        </div>
+      </section>
+
+      <section class="slide" data-title="BU Folder Structure">
+        <h2>BU Outlook Folder Structure</h2>
+        <p class="section-intro">Each region follows the same task-group folder taxonomy for consistent routing.</p>
+        <div class="tree-map">
+          <div class="tree-root"><i class="bi bi-folder2-open"></i> BU Inbox</div>
+          <div class="tree-trunk" aria-hidden="true"></div>
+          <div class="tree-branches">
+            <article class="tree-region">
+              <h3><i class="bi bi-folder-fill"></i> CEU</h3>
+              <ul class="tree-children">
+                <li><i class="bi bi-folder2"></i> Activations</li>
+                <li><i class="bi bi-folder2"></i> Data Entry</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Short</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Medium</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Long</li>
+              </ul>
+            </article>
+            <article class="tree-region">
+              <h3><i class="bi bi-folder-fill"></i> WEU</h3>
+              <ul class="tree-children">
+                <li><i class="bi bi-folder2"></i> Activations</li>
+                <li><i class="bi bi-folder2"></i> Data Entry</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Short</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Medium</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Long</li>
+              </ul>
+            </article>
+            <article class="tree-region">
+              <h3><i class="bi bi-folder-fill"></i> NEU</h3>
+              <ul class="tree-children">
+                <li><i class="bi bi-folder2"></i> Activations</li>
+                <li><i class="bi bi-folder2"></i> Data Entry</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Short</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Medium</li>
+                <li><i class="bi bi-folder2"></i> Maintenance Long</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Robot Architecture">
+        <div class="split-head">
+          <h2>1) Robot Architecture</h2>
+          <span class="tag-accent">Deterministic + LLM fallback</span>
+        </div>
+        <div class="decision-layout">
+          <div class="decision-column">
+            <h3>Preprocessing</h3>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Collect email body, contacts, other relevant meta data from MS Graph Outlook.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Strip HTML formatting.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Remove user signatures for cleaner context.</li>
+            </ul>
+          </div>
+          <div class="decision-column">
+            <h3>Region Logic</h3>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Where possible, loop keywords from BU Matrix first.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>If no match: ask LLM for best [Region] guess.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>If still unresolved: move to <span class="pill">[Robot Exceptions]</span>.</li>
+            </ul>
+          </div>
+          <div class="decision-column">
+            <h3>Task Group Logic</h3>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Use LLM to infer [Task Group] from conversation topic.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Combine with final [Region] for destination folder decision.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Prompt Architecture">
+        <h2>2) Prompt Architecture</h2>
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <div class="panel">
+              <h3>Prompt Format Design</h3>
+              <div class="prompt-steps">
+                <div class="prompt-step">
+                  <h4>Static header</h4>
+                  <pre class="prompt-code"><code>Explain to the LLM what the task is about,
+and what format it should respond in. Clarify confidence % threshold
+before the answer becomes [Unknown].</code></pre>
+                </div>
+                <div class="prompt-step">
+                  <h4>Dynamic instructions from BU Matrix</h4>
+                  <pre class="prompt-code"><code>Collecting regions, task groups, keywords, and descriptions from
+the matrix and structuring them into a single
+understandable text block.</code></pre>
+                </div>
+                <div class="prompt-step">
+                  <h4>Static footer</h4>
+                  <pre class="prompt-code"><code>Final clarification and emphasis on the format
+of the expected response.</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="panel highlight">
+              <h3>Expected LLM Output</h3>
+              <p class="mono-output">[answer] + {confidence 90%} + &lt;reasoning&gt;</p>
+              <p>Stored in separate Item Data fields:</p>
+              <div class="chip-row">
+                <span class="chip">LLM Answer</span>
+                <span class="chip">LLM Confidence</span>
+                <span class="chip">LLM Reasoning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="LEO vs JSON">
+        <h2>Why LEO Instead of JSON</h2>
+        <div class="comparison-grid">
+          <article class="compare-card bad">
+            <h3>JSON Output</h3>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Strong structure, but model responses can break JSON syntax.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Higher token usage due to keys, braces, and strict nesting.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Parsing is less tolerant when output is partially malformed.</li>
+            </ul>
+          </article>
+          <article class="compare-card good">
+            <h3>LEO (Low Entropy Output)</h3>
+            <p class="mono-output">[answer] + {confidence} + &lt;reasoning&gt;</p>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Compact, predictable delimiter pattern with less token use.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Very reliable extraction with Regex even when LLM response violated requested structure.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="LLM Output Handling">
+        <h2>3) LLM Output Handling</h2>
+        <div class="regex-layout">
+          <div class="regex-left">
+            <p><span class="pill">Regex</span> extraction maps segments into item fields:</p>
+            <div class="regex-list">
+              <div><code>[...]</code> <i class="bi bi-arrow-right"></i> Answer</div>
+              <div><code>{...}</code> <i class="bi bi-arrow-right"></i> Confidence</div>
+              <div><code>&lt;...&gt;</code> <i class="bi bi-arrow-right"></i> Reasoning</div>
+            </div>
+            <p class="regex-example-label">Example output:</p>
+            <pre class="prompt-code regex-example"><code>[Maintenance Short] {90%} &lt;Location updates are requested, so the email is classified as Maintenance Short.&gt;</code></pre>
+          </div>
+          <div class="regex-right">
+            <div class="note-box">
+              <h3>Current Limitation</h3>
+              <p>Confidence % is still broad and not yet calibrated.</p>
+            </div>
+            <div class="note-box">
+              <h3>Why we record Confidence &amp; Reasoning?</h3>
+              <p>Keeping these data points in Item Data and adding them to Reports helps Developers, BAs, POs, and BU with troubleshooting, auditing, and understanding the LLM's decisions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="LLM Traceability">
+        <h2>4) LLM Traceability</h2>
+        <div class="sheet-wrap">
+          <table class="excel-table">
+            <thead>
+              <tr>
+                <th>Item Key</th>
+                <th>Tags</th>
+                <th>LLM Answer</th>
+                <th>LLM Confidence</th>
+                <th>LLM Reasoning</th>
+                <th>Last Updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="seed-row">
+                <td>email subject line + date received</td>
+                <td>moved to: full folder path</td>
+                <td>[Answer]</td>
+                <td>{Confidence %}</td>
+                <td>&lt;Reasoning&gt;</td>
+                <td>date+time Blue Prism processed the item</td>
+              </tr>
+              <tr>
+                <td>Store activation request - 2026-01-08</td>
+                <td>moved to: Inbox/WEU/Activations</td>
+                <td>Activations</td>
+                <td>93%</td>
+                <td>Email asks to activate a new store and references activation timeline.</td>
+                <td>2026-01-08</td>
+              </tr>
+              <tr>
+                <td>Update asset ownership fields - 2026-01-12</td>
+                <td>moved to: Inbox/CEU/Data Entry</td>
+                <td>Data Entry</td>
+                <td>88%</td>
+                <td>Main request is to update records, with explicit field-level corrections.</td>
+                <td>2026-01-12</td>
+              </tr>
+              <tr>
+                <td>Urgent POS fix before opening - 2026-01-14</td>
+                <td>moved to: Inbox/NEU/Maintenance Short</td>
+                <td>Maintenance Short</td>
+                <td>91%</td>
+                <td>Issue is operational and immediate, expected to be resolved in a short cycle.</td>
+                <td>2026-01-14</td>
+              </tr>
+              <tr>
+                <td>Planned maintenance in Q1 rollout - 2026-01-20</td>
+                <td>moved to: Inbox/WEU/Maintenance Medium</td>
+                <td>Maintenance Medium</td>
+                <td>86%</td>
+                <td>Scope spans multiple sites and requires phased medium-term maintenance work.</td>
+                <td>2026-01-20</td>
+              </tr>
+              <tr>
+                <td>Legacy hardware replacement project - 2026-01-25</td>
+                <td>moved to: Inbox/CEU/Maintenance Long</td>
+                <td>Maintenance Long</td>
+                <td>90%</td>
+                <td>Large replacement effort with dependencies indicates long-duration maintenance.</td>
+                <td>2026-01-25</td>
+              </tr>
+              <tr>
+                <td>Bulk partner records correction - 2026-01-29</td>
+                <td>moved to: Inbox/NEU/Data Entry</td>
+                <td>Data Entry</td>
+                <td>87%</td>
+                <td>Request focuses on correcting multiple partner data fields across existing records.</td>
+                <td>2026-01-29</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Key Issue 1">
+        <h2>Key Issue 1: “Completed” ≠ “Correctly Completed”</h2>
+        <div class="status-board">
+          <div class="status-card neutral">
+            <h3>Blue Prism Completed</h3>
+            <p>Process execution finished successfully.</p>
+          </div>
+          <div class="status-arrow"><i class="bi bi-arrow-right"></i></div>
+          <div class="status-card warning">
+            <h3>Not a Quality Guarantee</h3>
+            <p>Does not prove the LLM classification result is correct.</p>
+          </div>
+        </div>
+        <div class="status-note plain-emphasis">
+          <p class="status-note-lead">Completed is an execution status, not a quality verdict.</p>
+          <p>In AI/LLM-enabled automation, true success rate cannot be inferred from completion alone. A Blue Prism item marked as <strong>Completed</strong> only confirms that no <strong>System</strong>, <strong>Internal</strong>, or <strong>Business Exceptions</strong> were raised; it does not confirm the decision was correct. Teams should therefore track an approximate confidence view of robot adequacy and reasonableness, and keep it under continuous review after production release.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Key Issues 2-3">
+        <h2>Key Issues 2 and 3</h2>
+        <div class="row g-4 h-100">
+          <div class="col-lg-6">
+            <h3>Hallucinations / Accuracy Risk</h3>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Inaccuracy and made-up answers (hallucinations) can be impacted by either LLM model quality or prompt structure quality.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>For older LLM models, larger prompts might reduce accuracy.</li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Temperature/TopP can be configured from 0.0 to 1.0 but usually yields moderate accuracy gains (~1%-5%).</li>
+            </ul>
+          </div>
+          <div class="col-lg-6">
+            <h3>BU Matrix Inconsistencies</h3>
+            <ul>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Contradictory or <strong>fuzzy</strong> category definitions.
+                <div class="matrix-example-row">
+                  <span class="matrix-example short">Maintenance Short: "Create terminal for this Agent"</span>
+                  <span class="matrix-example long">Maintenance Long: "Create terminal certificate for this Agent"</span>
+                </div>
+              </li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>New requirements introduced during UAT.
+                <div class="matrix-example-row">
+                  <span class="matrix-example uat">"We should create a folder called 'Assessment' for this type of email"</span>
+                </div>
+              </li>
+              <li><i class="bi bi-check2-circle list-check" aria-hidden="true"></i>Mid-UAT rule additions break DataSet comparability.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Solutions and Testing">
+        <h2>Testing: Dataset Creation</h2>
+        <p class="section-intro">Similar to how a student solves math problems in a school book and then peeks at the answers page to verify if they got the right answer, the Testing Bench robot does the same by checking the correct-answers file after reprocessing the same dataset.</p>
+        <div class="timeline">
+          <div class="timeline-item"><span>1</span> Blind UAT run on 150+ emails.</div>
+          <div class="timeline-item"><span>2</span> BU reviewed each Inbox folder assignment done by Robot.</div>
+          <div class="timeline-item"><span>3</span> Developer created a benchmark Excel file with correct folder paths for each email item.</div>
+          <div class="timeline-item"><span>4</span> Testing Bench robot uses benchmark file to auto-validate its future runs against correct answers.</div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Testing Bench robot">
+        <h2>Testing Bench robot</h2>
+        <div class="bench-grid">
+          <div class="bench-card">
+            <h3>Architecture</h3>
+            <p>Exact copy of original robot, but external actions (e.g., moving emails) are disabled.</p>
+            <p><strong>GetWork change:</strong> collects completed/failed items from original robot's queue, and imports them as fresh pending items into Testing bench queue.</p>
+          </div>
+          <div class="bench-card">
+            <h3>Validation Logic</h3>
+            <p>Add a new Generate Report logic that compares current run output vs benchmark dataset and calculates estimated accuracy %.</p>
+            <p><strong>Report should emphasize:</strong><br>decision + LLM Temperature + LLM TopP + accuracy %</p>
+          </div>
+          <div class="bench-card">
+            <h3>Ease of Use</h3>
+            <p>Ensure the Testing Bench robot is coded to function end-to-end, and can be run from Control Panel with no manual intervention from the Developer.</p>
+            <p>Auto-send report and accuracy result by email to interested parties.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Closing">
+        <div class="closing-wrap">
+          <h2>Closing</h2>
+          <p>In short, the project combines deterministic matrix logic with LLM-assisted classification, while adding traceability and a reusable testing bench to measure improvements safely over time.</p>
+          <p class="closing-sub">Thank you.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="deck-footer d-flex justify-content-between align-items-center">
+      <div class="slide-title" id="slideTitle">Project Goal</div>
+      <div class="controls">
+        <button id="prevBtn" class="btn btn-outline-secondary btn-lg" type="button"><i class="bi bi-arrow-left"></i> Prev</button>
+        <button id="nextBtn" class="btn btn-primary btn-lg" type="button">Next <i class="bi bi-arrow-right"></i></button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
